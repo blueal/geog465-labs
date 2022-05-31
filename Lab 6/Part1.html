@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Leaflet Essentials</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+</head>
+
+<body>
+    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+    <div id="mapid" style="width: 600px; height: 400px; margin: auto"></div>
+    <script>
+        var mymap = L.map('mapid').setView([47.656896, -122.307511], 16);
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+    </script>
+</body>
+
+</html>
