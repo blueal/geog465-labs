@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lab 5</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    </head>
+    <body>
+        <div id="mapid" style="width: 600px; height: 400px; margin: auto;"></div>
+        <h1>Lab 5</h1>
+        <p>
+            Ok, we've got a lot to cover here so let's get started
+        </p>
+        <p>
+            First order of business, the POINTS! aka markers
+            <ul>
+                <li>I added a mouseover event listner</li>
+                <li>The mouseover event listners changes the opacity</li>
+                <li>I set a popup event listner to listen for clicks on the new york icon</li>
+                <li>The icon will change when clicked on for New York</li>
+                <li>There's a couple custom settings for the icons</li>
+            </ul>
+            Second Order, LINES!
+            <ul>
+                <li>I-5 shows up as dashed</li>
+                <li>I-5 has a custom end cap setting</li>
+                <li>Mississipi River is super wide</li>
+                <li>It's got custom end caps</li>
+                <li>It's has custom unround corners</li>
+            </ul>
+            And finally the polygons!
+            <ul>
+                <li>Florida has its stroke turned off, making it a highlighter</li>
+                <li>Custom stroke on wyoming</li>
+                <li>Fill opacity has been changed</li>
+                <li>Bevel ends!</li>
+            </ul>
+            Technically speaking even though I'm using lists, they are paragraphs because they are inside the p tags
+        </p>
+        <script>
+            var mymap = L.map('mapid',
+            {
+                center: [37.0902, -95.7129],
+                zoom: 3
+            });
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+
+            var NewYorkIcon1 = L.icon({
+                iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-green.png',
+                shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+                popupAnchor: [0, -40]
+            })
+            var NewYorkIcon2 = L.icon({
+                iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-red.png',
+                shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+                popupAnchor: [0, -40]
+            })
+            var myMarkerSeattle = L.marker([47.6062, -122.3321], {opacity:0.5, title:"Hovering!"}).addTo(mymap).bindPopup("<h2>Greetings! Seattle is here!</h2><p>I'm not picking Seattle because it's easy, I genuinely think it's one of my favorite!</p>");
+            var myMarkerNewYork = L.marker([40.7128, -74.0060]).addTo(mymap).bindPopup("<h2>Hi There! This is New York</h2><p>While I wouldn't live here, it's an interesting place</p>");
+
+            myMarkerSeattle.on('mouseover', function(e){
+                myMarkerSeattle.setOpacity(1);
+            });
+            myMarkerSeattle.on('mouseout', function(e){
+                myMarkerSeattle.setOpacity(0.5);
+            });
+
+            myMarkerNewYork.on('popupopen', function(e){
+                myMarkerNewYork.setIcon(NewYorkIcon1);
+            });
+            myMarkerNewYork.on('popupclose', function(e){
+                myMarkerNewYork.setIcon(NewYorkIcon2);
+            });
+
+            //Part 2
+
+            var i5latlong = [
+                [49.00, -122.75],
+                [47.83, -122.26],
+                [47.22, -122.46],
+                [45.47, -122.67],
+                [42.00, -122.61],
+                [37.24, -121.09],
+                [33.94, -118.09],
+                [32.54, -117.03]
+            ];
+
+            var polyline1 = L.polyline(i5latlong, {color: 'red', opacity: 0.5, lineCap:"butt", dashArray:4}).addTo(mymap);
+
+            polyline1.bindPopup("<h2>This is what most people call an interstate</h2><p>It's very long and goes from border to border</p><p>It's a little hard to tell from here but I have butt ends!");
+
+            var thatRiver = [
+                [44.89, -93.14],
+                [43.50, -91.21],
+                [41.98, -90.14],
+                [40.13, -91.51],
+                [36.76, -89.11],
+                [35.00, -90.30],
+                [32.33, -90.90],
+                [30.98, -91.65],
+                [29.95, -90.04],
+                [28.96, -89.07]
+            ];  
+
+            var polyline2 = L.polyline(thatRiver, {color: 'blue', opacity: 0.75, lineCap:"square", weight:25, lineJoin: "square"}).addTo(mymap);
+            polyline2.bindPopup("<h2>This river has a name that I can't type</h2><p>It's a long name, I know I'll get it wrong</p><p>I have square ends! And I'm blue, among other things");
+
+
+            //Part 3
+
+            var florida = [
+                [30.24, -87.51],
+                [30.99, -87.59],
+                [31.00, -85.00],
+                [30.71, -84.86],
+                [30.56, -82.21],
+                [30.83, -81.93],
+                [30.71, -81.34],
+                [26.78, -80.00],
+                [24.61, -80.52],
+                [27.87, -82.89],
+                [30.04, -84.05]
+            ];
+
+            var polygon1 = L.polygon(florida, {color: 'yellow', stroke:false}).addTo(mymap);
+            polygon1.bindPopup("<h2>A state me call this</h2><p>Florida has it all, land, water, sky, what more could you ask?</p>");
+
+            var wyoming = [
+                [45.00, -111.05],
+                [44.99, -104.05],
+                [41.00, -104.05],
+                [40.99, -111.04]
+            ];
+            var polygon2 = L.polygon(wyoming, {color: 'green', stroke:14, fill:true, fillOpacity: 0.05, lineJoin:"bevel"}).addTo(mymap);
+            polygon2.bindPopup("<h2>I hear this place is empty</h2><p>They've got a national park going for them though, which is nice</p>");           
+        </script>
+    </body>
+</html>
