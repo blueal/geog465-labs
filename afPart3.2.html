@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Leaflet Essentials</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"/>
+    </head>
+    <body>
+        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+        <div id="mapid" style="width: 600px; height: 400px; margin: auto"></div>
+        <script>
+            var mymap = L.map('mapid',{center: [35.10418, -106.62987], zoom: 10});
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+
+            var marker = L.marker([35.10418, -106.62987]).bindPopup("<h1>Marker 1</h1><p>I am a marker!</p>");
+
+
+            var marker2 = L.marker([35.02381, -106.63811]);
+
+            var polyline = L.polyline([[35.10418, -106.62987], [35.19738, -106.875], [35.07946, -106.80634]], {color:'red', weight:8});
+
+            var myLayerGroup = L.layerGroup([marker, polyline]).addTo(mymap);
+            myLayerGroup.addLayer(marker2);
+
+            var marker = L.marker([35.10418, -106.62987]).bindPopup("I am a marker!");
+
+            var myPopup = L.popup({keepInView:true, closeButton:false}).setContent("I am a marker!");
+            marker.bindPopup(myPopup);
+            marker2.bindPopup(myPopup);
+
+            var myFeatureGroup = L.featureGroup([marker, marker2, polyline]).addTo(mymap).setStyle({color:'purple', opacity:.5}).bindPopup("We have the same pop up!");
+
+        </script>
+    </body>
+</html>

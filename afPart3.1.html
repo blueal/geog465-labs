@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>geog465_My First Map</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    </head>
+    <body>
+        <div id="mapid" style="width: 600px; height: 400px; margin: auto;"></div>
+        <script>
+            var mymap = L.map('mapid',
+            {
+                center: [47.6553, -122.3035],
+                zoom: 14
+            });
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+            }).addTo(mymap);
+            var seattleIcon = L.icon({
+                iconUrl: 'http://l.thumbs.canstockphoto.com/canstock8020581.jpg',
+                iconSize:     [38, 38], });          // size of the icon
+            var myMarker = L.marker([47.6062, -122.3321],
+                {icon:seattleIcon, draggable: true}).addTo(mymap).bindPopup("Hi, from Seattle");
+                var mypolyline = L.polyline([[47.593792, -122.333723],[46.798276, -96.756621],[42.347259, -71.052004]], {color:'red', weight:8}).addTo(mymap);
+                var mypolygon = L.polygon([[[48.825293, -103.981806],[46.092644,-103.981806],[45.929688, -96.543221],[49.003219, -97.180428]]],{color:'red', weight:8, fillColor:'blue', fillOpacity:1}).addTo(mymap);
+                var multipolygon = L.polygon([[[35.10418, -106.62987],[35.19738, -106.875],[35.07946, -106.80634]],[[35.11654, -106.58318],[35.13142, -106.48876],[35.07384, -106.52412]]], {color: 'red',weight:8}).addTo(mymap);
+        </script>
+    </body>
+</html>
