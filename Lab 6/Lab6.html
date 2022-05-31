@@ -3,6 +3,7 @@
 <!--We are creating an HTML document-->
 <html>
 <!--Non visible content, document properties, metadata, and other things that need to be loaded in-->
+
 <head>
     <!--Title of the document that appears in the browser-->
     <title>Leaflet Essentials</title>
@@ -11,6 +12,7 @@
     <!--Ending Header tag-->
 </head>
 <!--Starting visible portion of document. Not that everything is visible, but this is where our content lives-->
+
 <body>
     <!--Attaching a Javascript file to the document to be loaded. This is a leaflet JS file from a CDN-->
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
@@ -154,9 +156,9 @@
         //When executed, This returns the key value pair purple. For setting the default color as purple
         function styleFunction() { return { color: "purple" }; }
         //Ths sets the geojsonlayer style as blue
-        function newStyle() { geojsonLayer, geojsonLayer.setStyle({ color: "blue" }); }
+        function newStyle(e) { e.target.setStyle({ color: "blue" }); }
         //Sets the geojsonlayer style as green.
-        function oldStyle() { geojsonLayer.setStyle({ color: "green" }); }
+        function oldStyle(e) { e.target.setStyle({ color: "green" }); }
         //Our function that get's executed if we happen to hover on something. It's passed in the layer file we are modifying and the exact feature.
         function happenHover(feature, layer) {
             //When executed, it binds a popup containg the name of the feature, linebreak, and the embedded popup contents, and hides the close button
@@ -176,7 +178,8 @@
 
     //We are done with our script!
     </script>
-<!--We are dpme with the content of our document-->
+    <!--Done with the content of our document-->
 </body>
 <!--End of Document-->
+
 </html>
