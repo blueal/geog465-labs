@@ -33,10 +33,10 @@ function popUpGeoJson(feature, layer) {
 };
 
 //Create Lines and Polygons
-var linkLayer = L.geoJSON(false, { onEachFeature: popUpGeoJson });
-var burkeLayer = L.geoJSON(false, { onEachFeature: popUpGeoJson });
-var gasworksLayer = L.geoJSON(false, { onEachFeature: popUpGeoJson });
-var southLayer = L.geoJSON(false, { onEachFeature: popUpGeoJson });
+var linkLayer = L.geoJSON(false, { color: "blue", onEachFeature: popUpGeoJson });
+var burkeLayer = L.geoJSON(false, { color: "black", onEachFeature: popUpGeoJson });
+var gasworksLayer = L.geoJSON(false, { color: "brown", onEachFeature: popUpGeoJson });
+var southLayer = L.geoJSON(false, { color: "green", onEachFeature: popUpGeoJson });
 
 //Load GeoJSON
 $.getJSON("./data/link.geojson", function (data) { linkLayer.addData(data); });
