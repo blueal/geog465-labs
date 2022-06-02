@@ -10,10 +10,10 @@ var gasworksLayer = L.geoJSON(false, { style: "brown" });
 var southLayer = L.geoJSON(false, { style: "yellow" });
 
 //Load GeoJSON
-$.getJSON("./link.geojson", function (data) { linkLayer.addData(data); });
-$.getJSON("./burke.geojson", function (data) { burkeLayer.addData(data); });
-$.getJSON("./gasworks.geojson", function (data) { gasworksLayer.addData(data); });
-$.getJSON("./south.geojson", function (data) { southLayer.addData(data); });
+$.getJSON("./data/link.geojson", function (data) { linkLayer.addData(data); });
+$.getJSON("./data/burke.geojson", function (data) { burkeLayer.addData(data); });
+$.getJSON("./data/gasworks.geojson", function (data) { gasworksLayer.addData(data); });
+$.getJSON("./data/south.geojson", function (data) { southLayer.addData(data); });
 
 //Create our Point Icons
 //https://github.com/masajid390/BeautifyMarker
